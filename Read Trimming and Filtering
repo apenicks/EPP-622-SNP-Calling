@@ -1,0 +1,37 @@
+## Step 2: Read Trimming and Filtering (fastp)
+
+WARNING: Because these reads are simulated, fastp fails to identify that they need poly-G tail trimming. Turn that on with a flag.
+
+ADVICE: Its easier to compare the reads pre and post trimming if you run multiqc on the results of fastqc of the trimmed files (and do not use the .json files from fastp).
+
+### Commands
+
+Comments 
+
+```
+commands
+```
+
+MultiQC gives a rounded number for total reads and does not report total bases per sample. To find out those numbers use this:
+
+```
+for f in *.fastq.gz; do
+  echo -ne "$f\t"
+  zcat "$f" | awk 'NR%4==2{r++; b+=length($0)} END{printf "%d\t%d\t%.1f\n", r, b, b/r}'
+done | column -t
+```
+
+This gives the total reads, then the total bases, then the average read length for each file.
+
+### Results
+
+MultiQC report path and name: `_______`
+
+For each sample, report R1 + R2. Use the reference genome size above to calculate coverage.
+
+| Sample | Reads before | Reads after | Mean length before | Mean length after |
+| --- | --- | --- | --- | --- |
+| A | \- | \- | \- | \- |
+| B | \- | \- | \- | \- |
+| C | \- | \- | \- | \- |
+| D | \- | \- | \- | \- |
