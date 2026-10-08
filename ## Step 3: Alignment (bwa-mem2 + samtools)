@@ -1,0 +1,18 @@
+### Commands
+Comments 
+
+```
+commands
+```
+
+
+### Results
+
+MultiQC report path and name: `_______`
+
+| Sample | % mapped | % properly paired | Mean depth |
+| --- | --- | --- | --- |
+| A | \- | \- | \- |
+| B | \- | \- | \- |
+| C | \- | \- | \- |
+| D | \- | \- | \- |
