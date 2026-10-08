@@ -1,0 +1,45 @@
+Step 4: Variant Calling (bcftools mpileup + call)
+
+### Commands
+
+Comments 
+
+```
+commands
+```
+
+### Results
+
+bcftools stats report path and name: `_______`
+
+## Step 5: Filtering (bcftools filter)
+
+### Commands
+
+I am going to try a gentle filtering and more stingent filtering. (WARNING: These are different filters than what we have seen in class.)
+
+Gentle: exclude variants with a QUAL less than 20 or less than 5 total read depth across all samples.
+
+Stringent: exclude variants with a QUAL less than 30 or less than 10 total read depth across all samples or a site level mapping quality (root mean square) of less than 40
+
+```bash
+#filtering gentle
+#filtering stringent
+```
+
+```bash
+# bcftools stats on gentle
+# bcftools stats on stringent
+```
+
+### Results
+
+bcftools stats report path and name for gentle filtering: `_______`
+
+bcftools stats report path and name: for stringent filtering: `_______`
+
+| VCF | number of SNPs |
+| --- | --- |
+| raw | \- |
+| gentle | \- |
+| stringent | \- |
