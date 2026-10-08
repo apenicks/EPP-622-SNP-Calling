@@ -6,10 +6,18 @@ ADVICE: Its easier to compare the reads pre and post trimming if you run multiqc
 
 ### Commands
 
-Comments 
-
+ 
+Fastp for trimming by opening nano and writing a shell script. Utilizing -g (poly-G tail trimming).
 ```
-commands
+fastp   --in1 Sample_A_R1.fastq.gz \
+        --out1 Sample_A_R1.trimmed.fastq.gz \
+        --in2 Sample_A_R2.fastq.gz \
+        --out2 Sample_A_R2.trimmed.fastq.gz \
+        --detect_adapter_for_pe \
+        --thread 2 \
+        --json 21_FP_OH_FSB_F_10.fastp.json \
+        --html 21_FP_OH_FSB_F_10.fastp.html\
+        -g 
 ```
 
 MultiQC gives a rounded number for total reads and does not report total bases per sample. To find out those numbers use this:
@@ -25,13 +33,14 @@ This gives the total reads, then the total bases, then the average read length f
 
 ### Results
 
-MultiQC report path and name: `_______`
+MultiQC report path: `/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/03_fastp/trimmed_data`
+file name: trimmed_multiqc_report.html
 
 For each sample, report R1 + R2. Use the reference genome size above to calculate coverage.
 
 | Sample | Reads before | Reads after | Mean length before | Mean length after |
 | --- | --- | --- | --- | --- |
-| A | \- | \- | \- | \- |
-| B | \- | \- | \- | \- |
-| C | \- | \- | \- | \- |
-| D | \- | \- | \- | \- |
+| A | 1,609,300| 804,650 | 150.0 | 150.0 |
+| B | 321,860 | 160,930 | 150.0 | 150.0 |
+| C | 1,609,300 | 788,629 | 150.0 | 125.9 |
+| D | 1,609,300 | 804,650 | 150.0 | 150.0 |
