@@ -1,0 +1,31 @@
+## Assignment Analysis - Questions to answer
+
+Minimum one paragraph each.
+
+> How did samples differ from each other in read count versus in read quality? Why does each matter for SNP calling?
+
+> What are the relative merits and drawbacks of filtering? Interpret the above chart in terms of the original quality issues, and how those yielded different outcomes. When is filtering a good idea vs when it is it a bad idea? Think specifically about false positives vs false negatives.
+
+> Pick **two false negatives** and **two false positives**, from any sample. For each, tell me the sample, tell me the chromosome and coordinate location, put in a screenshot of IGV or JBrowse, and explain the specific cause of the FN or FP call.
+
+## AI Analysis - Pipeline Audit
+
+This is an evaluation of the pipeline you generated at the beginning of the learning module. Provide full sentences and thoughtful rationale.
+
+Model used:
+
+Date generated:
+
+Exact prompt:
+
+Minimum one paragraph each.
+
+> Three things it got right.
+
+> Three things you don't understand and would want to learn more about before using. Or do you understand all of it? If so be ready to answer questions about it.
+
+> How specifically would you assess the results of this pipeline for accuracy?
+
+> What did the labs teach you that turned out to matter for evaluating the AI-generated code?
+
+> What is the value of learning about a computational genomics task before using AI for it — or is there none?
