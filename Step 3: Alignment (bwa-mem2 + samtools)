@@ -1,8 +1,21 @@
 ### Commands
-Comments 
+Conda was activated.
+```
+conda activate snps
+```
+
+Shell script was created for each sample in the structure below:
 
 ```
-commands
+bwa-mem2 mem \
+-t 2 \
+sacCer3.fa \
+Sample_A_R1.trimmed.fastq.gz \
+Sample_B_R2.trimmed.fastq.gz \
+| \
+samtools sort \
+-@ 2 \
+-o Sample_A_R.sorted.bam \
 ```
 
 
