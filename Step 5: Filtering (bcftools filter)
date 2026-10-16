@@ -2,30 +2,32 @@
 
 ### Commands
 
-I am going to try a gentle filtering and more stingent filtering. (WARNING: These are different filters than what we have seen in class.)
-
-Gentle: exclude variants with a QUAL less than 20 or less than 5 total read depth across all samples.
-
-Stringent: exclude variants with a QUAL less than 30 or less than 10 total read depth across all samples or a site level mapping quality (root mean square) of less than 40
+Filtering raw variant calls under two distinct quality thresholds and computing corresponding summary statistics.
 
 ```bash
 #filtering gentle
+bcftools filter -e 'QUAL < 20 || INFO/DP < 5' yeast_samples_raw.vcf.gz -O z -o gentle_filtered.vcf.gz
+
 #filtering stringent
+bcftools filter -e 'QUAL < 30 || INFO/DP < 10 || INFO/MQ < 40' yeast_samples_raw.vcf.gz -O z -o stringent_filtered.vcf.gz
 ```
 
 ```bash
 # bcftools stats on gentle
+bcftools stats gentle_filtered.vcf.gz > gentle_stats.txt
+
 # bcftools stats on stringent
+bcftools stats stringent_filtered.vcf.gz > stringent_stats.txt
 ```
 
 ### Results
 
-bcftools stats report path and name for gentle filtering: `_______`
+bcftools stats report path and name for gentle filtering: `/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/05_bcftools/gentle_stats.txt `
 
-bcftools stats report path and name: for stringent filtering: `_______`
+bcftools stats report path and name: for stringent filtering: `/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/05_bcftools/stringent_stats.txt `
 
 | VCF | number of SNPs |
 | --- | --- |
-| raw | \- |
-| gentle | \- |
-| stringent | \- |
+| raw | 4920 |
+| gentle | 4869 |
+| stringent | 4774 |
