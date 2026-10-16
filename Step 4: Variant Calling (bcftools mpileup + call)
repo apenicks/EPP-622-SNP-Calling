@@ -2,44 +2,63 @@ Step 4: Variant Calling (bcftools mpileup + call)
 
 ### Commands
 
-Comments 
 
+The BAM alignment files and reference genome from the ../04/bwamem2/ directory were soft-liked to the 05_bcftools directory. 
 ```
-commands
+ln -s ../04_bwamem2/Sample_A_R.sorted.bam .
+ln -s ../04_bwamem2/Sample_B_R.sorted.bam .
+ln -s ../04_bwamem2/Sample_C_R.sorted.bam .
+ln -s ../04_bwamem2/Sample_D_R.sorted.bam .
+ln -s ../04_bwamem2/sacCer3.fa .
+```
+
+BAM files being so massive need to be index to aid with the alignment data. This would allow for tools such as bcftools to locate and jump
+```
+samtools index Sample_A_R.sorted.bam
+samtools index Sample_B_R.sorted.bam
+samtools index Sample_C_R.sorted.bam
+samtools index Sample_D_R.sorted.bam
+```
+
+In this stage 'bcftools mileup' was used on each sample to compare the aligned reads to the reference genome position-by-position to summarize  how the bases match up and output the results into the .bcf file format. Below is an example with Sample_A_R.
+```
+bcftools mpileup \
+  -f sacCer3.fa \
+  -a AD,ADF,ADR,DP,SP \
+  -q 5 \
+  -d 250 \
+  -Ou \
+  -o Sample_A_R.pileup.bcf \
+  Sample_A_R.sorted.bam
+```
+
+The 'bcftools stats' command generates a text-based summary for the individual sample's raw .bcf and saves the output as a text file. 
+This would be conducted for each sample. 
+```
+bcftools stats Sample_A_R.raw.bcf > Sample_A_R.raw.stats.txt
+```
+
+Alternatively, to process multiple sample BAM files simultaneously using a list text file to compile alignment data against the reference genome. 
+```
+bcftools mpileup \
+  -Ou \
+  -q 5 \
+  -b bam_list.txt \
+  -f sacCer3.fa \
+  -a AD,ADF,ADR,DP,SP | \
+bcftools call \
+  -m \
+  -v \
+  -Oz \
+  -o yeast_samples_raw.vcf.gz
+```
+
+This command runs 'bcftools stats' on the raw multi-sample VCF file to compute variant counts and depth distribution then saves the results into a text report. 
+```
+bcftools stats yeast_samples_raw.vcf.gz > yeast_samples_raw.stats.txt
 ```
 
 ### Results
 
-bcftools stats report path and name: `_______`
+bcftools stats report path and name: `/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/05_bcftools/yeast_samples_raw.stats.txt`
 
-## Step 5: Filtering (bcftools filter)
-
-### Commands
-
-I am going to try a gentle filtering and more stingent filtering. (WARNING: These are different filters than what we have seen in class.)
-
-Gentle: exclude variants with a QUAL less than 20 or less than 5 total read depth across all samples.
-
-Stringent: exclude variants with a QUAL less than 30 or less than 10 total read depth across all samples or a site level mapping quality (root mean square) of less than 40
-
-```bash
-#filtering gentle
-#filtering stringent
-```
-
-```bash
-# bcftools stats on gentle
-# bcftools stats on stringent
-```
-
-### Results
-
-bcftools stats report path and name for gentle filtering: `_______`
-
-bcftools stats report path and name: for stringent filtering: `_______`
-
-| VCF | number of SNPs |
-| --- | --- |
-| raw | \- |
-| gentle | \- |
-| stringent | \- |
