@@ -2,18 +2,22 @@
 
 ### Commands
 
-Link to the provided evaluate_snps_v4.py and truth_snps.vcf. Find the precision, recall and F1 for gently filtered and stringently filtered SNP sets.
 
-Example of how to run evaluate_snps_v4.py:
-
+Command to evaluate the gently filtered variant calls against the benchmark truth set and output accuracy metrics.   
 ```bash
 python3 evaluate_snps_v4.py \
-    --truth truth_snps.vcf --calls <yourvcffile> \
-    --all-samples --tag strict --outdir outdir
+  --truth truth_snps.vcf \
+  --calls gentle_filtered.vcf.gz \
+  --all-samples --tag gentle --outdir gentle_eval_out
 ```
 
+
+Command to evaluate the stringently filtered variant calls against the benchmark truth set and output accuracy metrics.   
 ```
-code
+python3 evaluate_snps_v4.py \
+  --truth truth_snps.vcf \
+  --calls gentle_filtered.vcf.gz \
+  --all-samples --tag gentle --outdir stringent_eval_out
 ```
 
 ## Directory structure
@@ -24,19 +28,21 @@ From `this folder` that holds all my analysis, here is the directory structure (
 #output of tree command:
 ```
 
+
+
 ### Results
 
 | Sample | Filter | TP | FP | FN | Precision | Recall | F1 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | raw | \- | \- | \- | \- | \- | \- |
-| A | gentle | \- | \- | \- | \- | \- | \- |
-| A | strict | \- | \- | \- | \- | \- | \- |
-| B | raw | \- | \- | \- | \- | \- | \- |
-| B | gentle | \- | \- | \- | \- | \- | \- |
-| B | strict | \- | \- | \- | \- | \- | \- |
-| C | raw | \- | \- | \- | \- | \- | \- |
-| C | gentle | \- | \- | \- | \- | \- | \- |
-| C | strict | \- | \- | \- | \- | \- | \- |
-| D | raw | \- | \- | \- | \- | \- | \- |
-| D | gentle | \- | \- | \- | \- | \- | \- |
-| D | strict | \- | \- | \- | \- | \- | \- |
+| A | raw | 4875 | 0 | 125 | 1.0000/0.9750 | 0.9739| 0.9765 |
+| A | gentle | 2046 | 4864 | 0 | 136/1.0000 | 0.9712 | 0.9862 |
+| A | strict | 2954 | 2046 | 4772 | 0/228 | 1.0000 | 0.9767 |
+| B | raw | 4422 | 23 | 578 | 10.9948/0.8844 | 0.8375 | 0.9521 |
+| B | gentle | 2046 | 4419 | 0 | 581/1.0000 | 0.8838 | 0.9383 |
+| B | strict |  2954 | 2046 | 4347 | 0/653 | 1.0000 | 0.8694 |
+| C | raw | 4871 | 2 | 129 | 0.9996/0.9742 | 0.9729 | 0.9761 |
+| C | gentle | 2046 | 4865 | 0 | 135/1.0000 | 0.9730 | 0.9863 |
+| C | strict | 2954 | 2046 | 4772 | \0/228 | 1.0000 | 0.9544 |
+| D | raw | 4859 | 15 | 141 | 0.9969/0.9718 | 0.9695 | 0.9751 |
+| D | gentle | 2046 | 4851 | 1 | 149/0.9998 | 0.9702 | 0.9848 |
+| D | strict | 2954 | 2046 | 4761 | 0/239 | 1.0000 | 0.9544 |
