@@ -5,6 +5,27 @@ Conda environment was activated to provide the necessary software environment fo
 conda activate snps
 ```
 
+A new working directory was created and entered to organize the project output files. 
+```
+mkdir 04_bwamem2
+cd 04_bwamem2
+```
+
+The reference genome file was copied to the working directory.  
+```
+cp sacCer3.fa /lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/04_bwamem2/
+```
+
+The reference genome was indexed using bwa-mem2 index. Indexing is necessary because it enables the aligner to efficiently map sequence reads to their correct genomic locations. 
+```
+bwa-mem2 index sacCer3.fa
+```
+
+Soft-links were created for the trimmed files created 
+```
+ln -s ../03_fastp/trimmed_data/*trimmed.fastq.gz .
+```
+
 A shell script was created for each sample using the trimmed FASTQ files to run bwa-mem2 mem, aligning the reads to the reference genome and piping the output directly into samtools sort to generate a sorted BAM file (.sorted.bam). Below is an example using Sample_A; this was repeated for the remaining samples B-D.
 
 ```
