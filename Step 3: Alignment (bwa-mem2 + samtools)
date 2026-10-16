@@ -1,20 +1,4 @@
 ### Commands
-Conda environment was activated to provide the necessary software environment for running bwa-mem2, samtools, and MultiQC.
-
-```
-conda activate snps
-```
-
-A new working directory was created and entered to organize the project output files. 
-```
-mkdir 04_bwamem2
-cd 04_bwamem2
-```
-
-The reference genome file was copied to the working directory.  
-```
-cp sacCer3.fa /lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/04_bwamem2/
-```
 
 The reference genome was indexed using bwa-mem2 index. Indexing is necessary because it enables the aligner to efficiently map sequence reads to their correct genomic locations. 
 ```
