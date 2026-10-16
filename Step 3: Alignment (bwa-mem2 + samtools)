@@ -1,10 +1,11 @@
 ### Commands
-Conda was activated.
+Conda environment was activated to provide the necessary software environment for running bwa-mem2, samtools, and MultiQC.
+
 ```
 conda activate snps
 ```
 
-Shell script was created for each sample in the structure below:
+A shell script was created for each sample using the trimmed FASTQ files to run bwa-mem2 mem, aligning the reads to the reference genome and piping the output directly into samtools sort to generate a sorted BAM file (.sorted.bam). Below is an example using Sample_A; this was repeated for the remaining samples B-D.
 
 ```
 Nano Sample_A_R.sh
@@ -22,18 +23,37 @@ samtools sort \
 Bash Sample_A_R.sh
 ```
 
+The script loops through the BAM files to evaluate alignment success by running three samtools commands: stats (for detailed alignment metrics), flagstat (for a quick summary of mapped versus unmapped reads), and coverage (to check genomic depth). 
 
 ```
-samtools stat Sample_A_R.sorted.bam > Sample_A_R.stats
+for bamfile in *bam
+do
+	# The ${VAR%pattern} syntax removes "pattern" from the END of the value.
+	SAMPLE=${bamfile%.sorted.bam}
+	echo $SAMPLE
+
+	samtools stats -@ 2 $bamfile > $SAMPLE.stats.txt
+	samtools flagstat -@ 2 $bamfile > $SAMPLE.flagstat.txt
+	samtools coverage $bamfile > $SAMPLE.coverage.txt
+```
+
+Each command generates a separate text report per sample that are aggregated by multiqc into a quality control report. 
+```
+multiqc .
+```
+
+The resulting report is then transferred to my local laptop directory using secure copy (scp) for viewing.
+```
+scp apenicks@sphinx.ag.utk.edu:/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/04_bwamem2/multiqc_report.html .
 ```
 
 ### Results
 
-MultiQC report path and name: `_______`
+MultiQC report path and name: `/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/04_bwamem2/multiqc_report.html`
 
 | Sample | % mapped | % properly paired | Mean depth |
 | --- | --- | --- | --- |
-| A | \- | \- | \- |
-| B | \- | \- | \- |
-| C | \- | \- | \- |
-| D | \- | \- | \- |
+| A | 100 | 100 | 20.0x |
+| B | 100 | 100 | 4.0x |
+| C | 100 | 100 | 16.4x |
+| D | 100 | 100 | 19.1x|
