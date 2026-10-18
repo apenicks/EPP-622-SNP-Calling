@@ -1,6 +1,6 @@
 ### Commands
 
-The reference genome was indexed using bwa-mem2 index. Indexing is necessary because it enables the aligner to efficiently map sequence reads to their correct genomic locations. 
+The reference genome was indexed using 'bwa-mem2 index'. Indexing is necessary because it enables the aligner to map sequence reads to their correct genomic locations. 
 ```
 bwa-mem2 index sacCer3.fa
 ```
@@ -10,7 +10,7 @@ Soft-links were created for the trimmed files created
 ln -s ../03_fastp/trimmed_data/*trimmed.fastq.gz .
 ```
 
-A shell script was created for each sample using the trimmed FASTQ files to run bwa-mem2 mem, aligning the reads to the reference genome and piping the output directly into samtools sort to generate a sorted BAM file (.sorted.bam). Below is an example using Sample_A; this was repeated for the remaining samples B-D.
+A shell script was created for each sample using the trimmed FASTQ files to run bwa-mem2 mem, aligning the reads to the reference genome and piping the output directly into samtools sort to generate a sorted BAM file '.sorted.bam'. Below is an example using Sample_A; this was repeated for the remaining samples B-D.
 
 ```
 Nano Sample_A_R.sh
@@ -42,12 +42,12 @@ do
 	samtools coverage $bamfile > $SAMPLE.coverage.txt
 ```
 
-Each command generates a separate text report per sample that are aggregated by multiqc into a quality control report. 
+Each command generates a separate text report per sample that were aggregated by 'multiqc' into a quality control report. 
 ```
 multiqc .
 ```
 
-The resulting report is then transferred to my local laptop directory using secure copy (scp) for viewing.
+The resulting report is then transferred to my local laptop directory using secure copy 'scp' for viewing.
 ```
 scp apenicks@sphinx.ag.utk.edu:/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/04_bwamem2/multiqc_report.html .
 ```
