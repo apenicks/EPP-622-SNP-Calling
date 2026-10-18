@@ -5,12 +5,12 @@ The reference genome was indexed using 'bwa-mem2 index'. Indexing is necessary b
 bwa-mem2 index sacCer3.fa
 ```
 
-Soft-links were created for the trimmed files created 
+Soft-links were created for the trimmed files.
 ```
 ln -s ../03_fastp/trimmed_data/*trimmed.fastq.gz .
 ```
 
-A shell script was created for each sample using the trimmed FASTQ files to run bwa-mem2 mem, aligning the reads to the reference genome and piping the output directly into samtools sort to generate a sorted BAM file '.sorted.bam'. Below is an example using Sample_A; this was repeated for the remaining samples B-D.
+A shell script was created for each sample using the trimmed 'FASTQ' files to run 'bwa-mem2 mem', aligning the reads to the reference genome and piping the output directly into samtools sort to generate a sorted BAM file '.sorted.bam'. Below is an example using Sample_A; this was repeated for the remaining samples B-D.
 
 ```
 Nano Sample_A_R.sh
@@ -28,7 +28,7 @@ samtools sort \
 Bash Sample_A_R.sh
 ```
 
-The script loops through the BAM files to evaluate alignment success by running three samtools commands: stats (for detailed alignment metrics), flagstat (for a quick summary of mapped versus unmapped reads), and coverage (to check genomic depth). 
+The script loops through the BAM files to evaluate alignment success by running three samtools commands: 'stats' (for detailed alignment metrics), 'flagstat' (for a quick summary of mapped versus unmapped reads), and 'coverage' (to check genomic depth). 
 
 ```
 for bamfile in *bam
