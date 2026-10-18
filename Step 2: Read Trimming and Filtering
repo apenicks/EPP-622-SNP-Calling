@@ -2,7 +2,7 @@
 
 ### Commands
 
-Shell script created in 'nano' to execute 'fastp' adapter and quality trimming, incorporating the '-g' flag for automatic poly-G tail removal.
+Shell script created in 'nano' to execute 'fastp' adapter and quality trimming, incorporating the '-g' flag for automatic poly-G tail removal. This was completed for each sample.
 ```
 fastp   --in1 Sample_A_R1.fastq.gz \
         --out1 Sample_A_R1.trimmed.fastq.gz \
@@ -15,7 +15,7 @@ fastp   --in1 Sample_A_R1.fastq.gz \
         -g 
 ```
 
-Because MultiQC rounds total read counts and does not display the exact total number of bases per sample, the following custom shell command to extract precise sequencing metrics.
+Because 'MultiQC' rounds total read counts and does not display the exact total number of bases per sample, the following custom shell command to extract precise sequencing metrics.
 ```
 for f in *.fastq.gz; do
   echo -ne "$f\t"
@@ -27,6 +27,7 @@ This outputs the exact total read count, base count, and average read length for
 ### Results
 
 MultiQC report path: `/lustre/isaac24/proj/UTK0505/apenicks/test2/analyses/03_fastp/trimmed_data`
+
 file name: trimmed_multiqc_report.html
 
 For each sample, the read counts combine both the forward (R1) and reverse (R2) sequencing directions. These combined totals are then used alongside the reference genome size to calculate overall sequencing coverage.
