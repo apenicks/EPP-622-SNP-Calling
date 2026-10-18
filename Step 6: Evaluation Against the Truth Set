@@ -2,9 +2,9 @@
 
 ### Commands
 
+This command was executed within a shell script to run the Python evaluation script, comparing the gently filtered variant call set 'gentle_filtered.vcf.gz' against the benchmark truth set 'truth_snps.vcf' to calculate true positives, false positives, false negatives, precision, recall, and F1 metrics, saving the output to the gentle_eval_out directory.
 
-Command to evaluate the gently filtered variant calls against the benchmark truth set and output accuracy metrics.   
-```bash
+```
 python3 evaluate_snps_v4.py \
   --truth truth_snps.vcf \
   --calls gentle_filtered.vcf.gz \
@@ -12,22 +12,28 @@ python3 evaluate_snps_v4.py \
 ```
 
 
-Command to evaluate the stringently filtered variant calls against the benchmark truth set and output accuracy metrics.   
+The stringent filter command was executed within a shell script to run the Python evaluation script, comparing the stringently filtered variant call set 'stringent_filtered.vcf.gz' against the benchmark truth set 'truth_snps.vcf' the output to the stringent_eval_out directory.
+
 ```
 python3 evaluate_snps_v4.py \
   --truth truth_snps.vcf \
-  --calls gentle_filtered.vcf.gz \
+  --calls stringent_filtered.vcf.gz \
   --all-samples --tag gentle --outdir stringent_eval_out
 ```
 
 ## Directory structure
 
-From `this folder` that holds all my analysis, here is the directory structure (paste the output of: `tree .`):
+From `this folder` that holds all my analysis, here is the directory structure:
 
 ```
-#output of tree command:
+tree .
 ```
-https://github.com/apenicks/EPP-622-SNP-Calling/issues/2
+
+Gentle
+https://github.com/apenicks/EPP-622-SNP-Calling/issues/1#issue-5904704054
+
+Stringent
+https://github.com/apenicks/EPP-622-SNP-Calling/issues/2#issue-5904706701
 
 
 ### Results
