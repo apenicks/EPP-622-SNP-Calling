@@ -2,30 +2,33 @@
 
 Minimum one paragraph each.
 
-> How did samples differ from each other in read count versus in read quality? Why does each matter for SNP calling?
+> Q1.) How did samples differ from each other in read count versus in read quality? Why does each matter for SNP calling?
 
-> What are the relative merits and drawbacks of filtering? Interpret the above chart in terms of the original quality issues, and how those yielded different outcomes. When is filtering a good idea vs when it is it a bad idea? Think specifically about false positives vs false negatives.
+> Q2.) What are the relative merits and drawbacks of filtering? Interpret the above chart in terms of the original quality issues, and how those yielded different outcomes. When is filtering a good idea vs when it is it a bad idea? Think specifically about false positives vs false negatives.
 
-> Pick **two false negatives** and **two false positives**, from any sample. For each, tell me the sample, tell me the chromosome and coordinate location, put in a screenshot of IGV or JBrowse, and explain the specific cause of the FN or FP call.
+> Q3.) Pick **two false negatives** and **two false positives**, from any sample. For each, tell me the sample, tell me the chromosome and coordinate location, put in a screenshot of IGV or JBrowse, and explain the specific cause of the FN or FP call.
 
 ## AI Analysis - Pipeline Audit
 
 This is an evaluation of the pipeline you generated at the beginning of the learning module. Provide full sentences and thoughtful rationale.
 
-Model used:
+Model used: Gemini
 
-Date generated:
+Date generated: 09/16/2026
 
-Exact prompt:
+My AI prompt: How to write you a complete short-read SNP calling pipeline for a haploid fungal genome, starting from paired FASTQ and ending at a filtered VCF. 
 
-Minimum one paragraph each.
+> Q4.)Three things it got right.
+> The AI-generated script correctly identified essential core steps: trimming adapters with `fastp`, indexing reference sequences prior to alignment, and applying quality and depth thresholds to remove false-positive variant calls. However, it used GATK `HaplotypeCaller` and standard `bwa` rather than the `bcftools mpileup` workflow and `bwa-mem2` specified in your class protocol, and it completely omitted the ground-truth benchmark evaluation step (`evaluate_snps_v4.py`). Hands-on testing is required to catch tool mismatches, adjust filter thresholds for low coverage, and fix syntax errors that could impact script execution. 
 
-> Three things it got right.
+> Q5.) Three things you don't understand and would want to learn more about before using. Or do you understand all of it? If so be ready to answer questions about it.
+>I would like to deepen my understanding of SAM and BAM files and how to generate them using tools like bwa-mem2 and samtools. Additionally, I want to gain more experience with understanding of how to read and interpret MultiQC reports to effectively evaluate read quality, trimming results, and alignment performance across my pipeline. Finally, I would like to get more experience with bcftools filtering options, including how to set appropriate quality thresholds and construct precise expressions to isolate high-confidence variants.
 
-> Three things you don't understand and would want to learn more about before using. Or do you understand all of it? If so be ready to answer questions about it.
+> Q6.) How specifically would you assess the results of this pipeline for accuracy?
+>Assessing the accuracy of a SNP calling pipeline comes down to three basic checks. First, you compare the called variants against a known truth set or answer key using an evaluation script to measure precision and recall. Second, check the summary stats from the VCF file since haploids have one set of chromosomes, a real mutation should have nearly 100% read support instead of a 50/50 split, and overall DNA changes should hit a 2.0 ratio. Third, visually inspect variants in a genome browser like IGV to confirm that the sequencing reads line up cleanly across the site without clustering errors near the ends of reads.
 
-> How specifically would you assess the results of this pipeline for accuracy?
+> Q7.) What did the labs teach you that turned out to matter for evaluating the AI-generated code?
+The labs gave me hands-on practice building shell scripts, interpretation of MultiQC reports, and using tools for trimming, filterning, and variant calling which aids with detecting errors in AI-generated code. Most importantly, evaluating true metrics.
 
-> What did the labs teach you that turned out to matter for evaluating the AI-generated code?
-
-> What is the value of learning about a computational genomics task before using AI for it — or is there none?
+> Q8.) What is the value of learning about a computational genomics task before using AI for it — or is there none?
+> While AI can quickly generate functional code, it frequently introduces biological mistakes. Understanding file mechanics, MultiQC diagnostics, and evaluation metrics like precision and recall ensures I can write precise prompts, audit AI-generated code for silent failures, and independently verify that my pipeline produces scientifically accurate results.
