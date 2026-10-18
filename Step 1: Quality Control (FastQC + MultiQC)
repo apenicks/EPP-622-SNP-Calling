@@ -41,7 +41,7 @@ For each sample, report R1 + R2.
 
 | Sample | Total reads | Total bases | Quality issues? |
 | --- | --- | --- | --- |
-| A | 1,609,300 | 241,395,000 | Adapter present at 5' end|
-| B | 321,860 | 48,279,000 | Adapter present at 5' end, lower sequencing depth|
-| C | 1609,300 | 241,395,000 | Adapter present at 5' end|
-| D | 1,609,300 | 241,395,000 | Adapter present at 5' end|
+| A | 1,609,300 | 241,395,000 | Problem Free |
+| B | 321,860 | 48,279,000 | Low Coverage |
+| C | 1609,300 | 241,395,000 | Low Quality |
+| D | 1,609,300 | 241,395,000 | Adapter and polyG issues |
