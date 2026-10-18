@@ -2,27 +2,22 @@
 
 ### Commands
 
-FastQC is a quality control tool that analyzes high-throughput sequencing data to generate a quick visual report containing potential issues, base quality scores, adapter contamination, or GC content.  
-It evaluates raw sequencing quality for one sample at a time. 
+'FastQC' is a quality control tool that analyzes high-throughput sequencing data to assess sample quality, generating visual reports on base quality scores, adapter contamination, and GC content for individual samples.
 
-Activate Conda prior to Fastqc
+Command to activate the Conda environment containing FastQC prior to executing quality analysis on the sample read sets.
 ```
 conda activate snps
 ```
-Make a directory 01_fastqc
+
+Create a directory to store the FastQC quality control reports.
 ```
 mkdir 01_fastqc
 ```
-Select a file name and make a directory for the individual samples A-D and enter file.
-```
-mkdir Sample_A
-cd Sample_A
-```
-When in the directory, start fastqc for each sample group. The -o flag specifies the output directory followed with a space and the directory ( . is the current directory).
+
+Run 'FastQC' on each sample set within your target directory, specifying '-o .' (the -o flag followed by a space and a period) to output the resulting 'HTML' and zip files to the current directory.
 ```
 fastqc ../../Raw_data/Sample_A_R1.fastq.gz -o . /
 ```
-
 
 MultiQC gives a rounded number for total reads and does not report total bases per sample. To find out those numbers use this:
 
