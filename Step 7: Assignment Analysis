@@ -9,6 +9,13 @@
 >Filtering is a good idea when targeted at specific platform errors, such as removing polyG tails or adapters in Sample D to prevent miscalled variants. It is a bad idea when applied blindly or over-aggressively—especially on low-coverage samples like Sample B—where trimming marginal reads destroys the necessary statistical support for true alleles, directly driving up false negatives. 
 
 > Q3.) Pick **two false negatives** and **two false positives**, from any sample. For each, tell me the sample, tell me the chromosome and coordinate location, put in a screenshot of IGV or JBrowse, and explain the specific cause of the FN or FP call.
+To identify the specific locations of false negatives across samples, I ran 'head Sample_A_R_stringent_false_negatives.tsv' and 'head Sample_B_R_stringent_false_negatives.tsv'. The generated TSV tables provided the genomic coordinates, chromosome IDs, and base substitutions (reference vs. alternate alleles) for each uncalled variant. For my report, I selected representative false negative examples from Samples A and B within the stringent evaluation output. Although all samples were evaluated, I was only able to locate a single false positive in Sample D 'head Sample_D_R_gentle_false_positives.tsv' within the gentle evaluation directory. Below is the jBrowse evaluation. 
+
+Sample A- False Negative
+
+Sample B- False Negative
+
+Sample D- False Positive 
 
 ## AI Analysis - Pipeline Audit
 
