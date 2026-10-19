@@ -1,14 +1,16 @@
 ## Assignment Analysis - Questions to answer
 
 > Q1.) How did samples differ from each other in read count versus in read quality? Why does each matter for SNP calling?
+> Across the sample set, profiles varied: Sample A served as a problem-free baseline, Sample B suffered from low coverage, Sample C exhibited low quality with reduced post-trimming read lengths, and Sample D contained adapter and polyG contamination. These metrics are critical for downstream SNP calling because adequate read count provides the statistical depth required to reliably distinguish true variants from background noise, while high read quality ensures base-call accuracy to prevent sequencing errors from being miscalled as false-positive polymorphisms.
 
 > Q2.) What are the relative merits and drawbacks of filtering? Interpret the above chart in terms of the original quality issues, and how those yielded different outcomes. When is filtering a good idea vs when it is it a bad idea? Think specifically about false positives vs false negatives.
+>Filtering sequencing reads removes adapter artifacts, homopolymer tails, and low-quality bases, preventing false positives during variant calling. However, its drawback is the risk of over-filtering, which discards valid reads, reduces coverage depth, and inflates false negatives.   
+>In the results table, the raw datasets maintain strong sensitivity (high TPs around 4,855–4,875 and low FPs), though Sample B inherently suffers higher initial false negatives (578) due to its low coverage. Applying gentle or strict filtering drastically alters outcomes: gentle filtering causes massive false-positive spikes (up to 4,865 FPs), while strict filtering sharply truncates true calls and elevates false negatives up to 4,772, demonstrating how miscalibrated thresholds distort accuracy.   
+>Filtering is a good idea when targeted at specific platform errors, such as removing polyG tails or adapters in Sample D to prevent miscalled variants. It is a bad idea when applied blindly or over-aggressively—especially on low-coverage samples like Sample B—where trimming marginal reads destroys the necessary statistical support for true alleles, directly driving up false negatives. 
 
 > Q3.) Pick **two false negatives** and **two false positives**, from any sample. For each, tell me the sample, tell me the chromosome and coordinate location, put in a screenshot of IGV or JBrowse, and explain the specific cause of the FN or FP call.
 
 ## AI Analysis - Pipeline Audit
-
-This is an evaluation of the pipeline you generated at the beginning of the learning module. Provide full sentences and thoughtful rationale.
 
 Model used: Gemini
 
